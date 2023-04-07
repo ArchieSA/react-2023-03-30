@@ -1,3 +1,4 @@
+import { Rating } from "@/components/Rating/Rating";
 import React from "react";
 
 export default function Review({ review }) {
@@ -9,7 +10,7 @@ export default function Review({ review }) {
 
   return (
     <div>
-      <p className="stars">{new Array(rating).join("*")}</p>
+      <Rating rating={rating}>*</Rating>
       <p>
         {user || ""}: {text || ""}
       </p>

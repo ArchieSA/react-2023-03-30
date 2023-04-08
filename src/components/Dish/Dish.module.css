@@ -1,0 +1,12 @@
+.name {
+    margin-bottom: 8px;
+}
+
+.price {
+    background-color: saddlebrown;
+    padding: 3px 12px;
+    color: white;
+    border-radius: 7px;
+    margin-top: 12px;
+    display: inline-block;
+}

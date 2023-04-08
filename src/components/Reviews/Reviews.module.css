@@ -1,0 +1,10 @@
+.reviews {
+    display: flex;
+    gap: 40px;
+}
+
+.title {
+    margin-bottom: 10px;
+}
+
+

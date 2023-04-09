@@ -4,7 +4,7 @@ export const Dish = ({dish}) => {
         <span>Dish: {dish.name}</span><br/>
         <span>Price: {dish.price}</span><br/>
         <span>Ingredients:
-            <ul>{dish.ingredients.map(i => <li>{i}</li>)}</ul>
+            <ul>{dish.ingredients.map(i => <li key={i}>{i}</li>)}</ul>
         </span><br/>
     </div>
 }

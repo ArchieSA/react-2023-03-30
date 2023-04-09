@@ -1,18 +1,17 @@
-import { Button } from "@/components/Button/Button";
 import React from "react";
+import {Menu} from "@/components/Menu/Menu";
+import {Reviews} from "@/components/Reviews/Reviews";
 
 export const Restaurant = ({ restaurant }) => {
   if (!restaurant) {
     return null;
   }
 
-  const { name } = restaurant;
-
   return (
     <div>
-      <Button>
-        <span>{name}</span>
-      </Button>
+        <h2>{restaurant.name}</h2><br/>
+        <Menu menu={restaurant.menu}/><br/>
+        <Reviews reviews={restaurant.reviews}/><br/>
     </div>
   );
 };

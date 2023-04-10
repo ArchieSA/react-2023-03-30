@@ -2,7 +2,7 @@ import React from "react";
 import { Dish } from "../Dish/Dish";
 
 export const Menu = ({ menu }) => {
-  if (!menu) {
+  if (!menu || !menu.length) {
     return null;
   }  
 

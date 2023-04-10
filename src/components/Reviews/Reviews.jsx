@@ -2,7 +2,7 @@ import React from "react";
 import { Review } from "../Review/Review";
 
 export const Reviews = ({ reviews }) => {
-  if (!reviews) {
+  if (!reviews || !reviews.length) {
     return null;
   }  
 

@@ -12,9 +12,7 @@ export const Restaurant = ({ restaurant }) => {
   return (
     <>
       <h1>Restaurant: {name}</h1>
-      <h2>Menu:</h2>
       <Menu menu={menu} />
-      <h2>Reviews:</h2>
       <Reviews reviews={reviews} />
     </>
   );

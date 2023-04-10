@@ -1,13 +1,14 @@
 import React from "react";
 
-export const Dish = ({ name, price, ingredients }) => {
-   if (!name) {
+export const Dish = ({ dish }) => {
+   if (!dish) {
      return null; 
    }
 
-   const ingredientsStr = Array.isArray(ingredients) ? ingredients.join(', ') : ''; 
+   const ingredients = Array.isArray(dish.ingredients) ? dish.ingredients.join(', ') : ''; 
+   const { name, price } = dish;
    
    return (
-     <li>{name} ({ingredientsStr}) -- {price}$</li>
+     <li>{name} ({ingredients}) -- {price}$</li>
    );
  }

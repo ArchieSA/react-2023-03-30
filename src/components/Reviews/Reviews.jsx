@@ -2,7 +2,7 @@ import React from "react";
 import Review from "./Review/Review";
 
 export default function Reviews({ reviews }) {
-  if (!reviews && !!reviews.length) {
+  if (!reviews?.length) {
     return null;
   }
 

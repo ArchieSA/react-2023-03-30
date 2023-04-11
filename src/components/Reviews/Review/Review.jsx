@@ -10,7 +10,7 @@ export default function Review({ review }) {
 
   return (
     <div>
-      <Rating rating={rating}>*</Rating>
+      <Rating rating={rating} raitingType="*" />
       <p>
         {user || ""}: {text || ""}
       </p>

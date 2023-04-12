@@ -1,4 +1,5 @@
 import React from "react";
+import { Raiting } from "../Raiting/Raiting";
 
 export const Review = ({ review }) => {
   if (!review) {
@@ -10,7 +11,7 @@ export const Review = ({ review }) => {
   return (
     <div>
       <p>{user}</p>
-      <p>{rating}</p>
+      <Raiting maxRating={5} value={rating}/>
       <p>{text}</p>
     </div>
   );

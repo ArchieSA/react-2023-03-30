@@ -1,5 +1,8 @@
 import { Button } from "@/components/Button/Button";
+
 import React from "react";
+import { Menu } from "@/components/Menu/Menu";
+import { Reviews } from "@/components/Reviews/Reviews";
 
 export const Restaurant = ({ restaurant }) => {
   if (!restaurant) {
@@ -10,9 +13,12 @@ export const Restaurant = ({ restaurant }) => {
 
   return (
     <div>
-      <Button>
-        <span>{name}</span>
-      </Button>
+
+      <h3><u>{name}</u></h3>
+      
+      <Menu menu={restaurant.menu}/>
+      <Reviews reviews={restaurant.reviews} />
+      <p>&nbsp;</p><p>&nbsp;</p>
     </div>
   );
 };

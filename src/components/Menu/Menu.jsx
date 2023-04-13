@@ -1,23 +1,19 @@
-import { Dish } from "@/components/Dish/Dish";
+import { Dish } from "@/components/Dish/dish";
 import React from "react";
 
-import styles from "./styles.module.scss";
-
 export const Menu = ({ menu }) => {
-  if (!menu?.length) {
+  if (!menu || !menu.length) {
     return null;
   }
-
+ 
   return (
-    <div className={styles.root}>
-      <h3>Menu</h3>
-      <ul className={styles.dishList}>
-        {menu.map((dish) => (
-          <li key={dish?.id} className={styles.dish}>
-            <Dish dish={dish} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-};
+    <ul >
+      <span>Menu</span>
+       {menu.map( dish => (
+        <li key={dish.id}>
+          <Dish key={dish.id} dish = {dish} />
+        </li>
+      ))}
+    </ul>
+  )
+}

@@ -1,8 +1,9 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import { RatingStar } from "../RatingStar/RatingStar";
+import classnames from "classnames";
 
-export const Rating = ({ value, maxRating = 5 }) => {
+export const Rating = ({ value, maxRating = 5, className }) => {
     if (isNaN(value) || isNaN(maxRating)) {
         return null;
     }
@@ -11,7 +12,7 @@ export const Rating = ({ value, maxRating = 5 }) => {
         return null;
     }
 
-    return <div className={styles.root}>
+    return <div className={classnames(styles.root, className)}>
         {[...Array(maxRating)].map((_, index) => (
             <RatingStar isGold={index < Math.round(value)} />
         ))}

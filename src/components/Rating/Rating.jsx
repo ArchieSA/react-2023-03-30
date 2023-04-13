@@ -25,7 +25,10 @@ export const Rating = ({ratingCurrent, ratingMax}) => {
       <ul className={classNames(styles.rating)}>
         { arr.map((value, index) => (
           <li key={index} >
-            {value ? <Image src="/images/star-gold.png" alt="" width="20" height="20" /> : <Image src="/images/star.png" alt="" width="20" height="20" /> }
+            {value ? 
+              <Image src="/images/star-gold.png" alt="" width="20" height="20" /> : 
+                <Image src="/images/star.png" alt="" width="20" height="20" /> 
+            }
           </li>)
         )}
       </ul>

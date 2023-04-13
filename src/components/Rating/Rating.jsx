@@ -14,7 +14,7 @@ export const Rating = ({ value, maxRating = 5, className }) => {
 
     return <div className={classnames(styles.root, className)}>
         {[...Array(maxRating)].map((_, index) => (
-            <RatingStar isGold={index < Math.round(value)} />
+            <RatingStar key={index} isGold={index < Math.round(value)} />
         ))}
     </div>;
 };

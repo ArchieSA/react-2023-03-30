@@ -13,29 +13,22 @@ export const Rating = ({
   const [state, setState] = useState(value);
 
   return (
-    <div
-      className={className}
-      onMouseLeave={() => {
-        setState(value);
-      }}
-    >
+    <div className={className} onMouseLeave={() => onChange && setState(value)}>
       {maxRating > 0 &&
-        new Array(maxRating).fill(null).map((_, index) => (
-          <Image
-            src={`/images/star${index >= state ? "" : "-gold"}.png`}
-            key={index}
-            className={styles.star}
-            width={32}
-            height={32}
-            alt={index >= value ? "black" : "gold"}
-            onClick={() => {
-              onChange && onChange(index + 1);
-            }}
-            onMouseEnter={() => {
-              setState(index + 1);
-            }}
-          />
-        ))}
+        new Array(maxRating)
+          .fill(null)
+          .map((_, index) => (
+            <Image
+              src={`/images/star${index >= state ? "" : "-gold"}.png`}
+              key={index}
+              className={styles.star}
+              width={32}
+              height={32}
+              alt={index >= value ? "black" : "gold"}
+              onClick={() => onChange && onChange(index + 1)}
+              onMouseEnter={() => onChange && setState(index + 1)}
+            />
+          ))}
     </div>
   );
 };

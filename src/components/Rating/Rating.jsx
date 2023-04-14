@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styles from "./styles.module.scss";
 import Image from "next/image";
 
@@ -9,12 +10,19 @@ export const Rating = ({
   className,
   onChange,
 }) => {
+  const [state, setState] = useState(value);
+
   return (
-    <div className={className}>
+    <div
+      className={className}
+      onMouseLeave={() => {
+        setState(value);
+      }}
+    >
       {maxRating > 0 &&
         new Array(maxRating).fill(null).map((_, index) => (
           <Image
-            src={`/images/star${index >= value ? "" : "-gold"}.png`}
+            src={`/images/star${index >= state ? "" : "-gold"}.png`}
             key={index}
             className={styles.star}
             width={32}
@@ -22,6 +30,9 @@ export const Rating = ({
             alt={index >= value ? "black" : "gold"}
             onClick={() => {
               onChange && onChange(index + 1);
+            }}
+            onMouseEnter={() => {
+              setState(index + 1);
             }}
           />
         ))}

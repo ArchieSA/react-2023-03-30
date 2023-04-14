@@ -4,21 +4,28 @@
   cursor: pointer;
   transition: opacity 0.2s, transform 0.2s;
 
-  &:hover {
+  font-weight: 500;
+  font-family: monospace;
+
+  border-radius: 4px;
+  border: none;
+
+  &:hover:not([disabled]) {
     opacity: 0.9;
     transform: scale(1.05);
+  }
+
+  &:disabled {
+    opacity: 0.6;
   }
 }
 
 .primary {
-  border-radius: 4px;
-  border: none;
   background-color: rgb(230, 69, 11);
   color: white;
 }
 
 .secondary {
   background-color: rgb(206, 206, 206);
-  border-radius: 4px;
-  border: 1px solid rgb(62, 62, 62);
+  color: black;
 }

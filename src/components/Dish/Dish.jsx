@@ -17,10 +17,10 @@ export const Dish = ({ dish }) => {
       <span>{name}</span>
       <Button className={styles.decrementAction} type="secondary">
         {/* <img src="/images/thumb-down.svg" alt="" /> */}
-        <ThumbDown />
+      -
       </Button>
       <Button className={styles.incrementAction} type="primary">
-        +
+      +
       </Button>
     </div>
   );

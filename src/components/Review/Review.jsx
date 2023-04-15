@@ -1,4 +1,6 @@
 import React from "react";
+import { Button } from "@/components/Button/Button";
+import { Rating } from "@/components/Rating/Rating";
 
 export const Review = ({ review }) => {
   if (!review) {
@@ -10,8 +12,9 @@ export const Review = ({ review }) => {
   return (
     <div>
       <p>{user}</p>
-      <p>{rating}</p>
+      <Rating value={rating}></Rating>
       <p>{text}</p>
+   
     </div>
   );
 };

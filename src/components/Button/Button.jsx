@@ -17,10 +17,9 @@ export function Button({
 }) {
   return (
     <button
-      onClick={onClick}
-      className={classNames(styles.root, buttonStyles[type], className, {
-        [styles.disabled]: disabled,
-      })}
+      disabled={disabled}
+      onClick={() => !disabled && onClick()}
+      className={classNames(styles.root, buttonStyles[type], className)}
     >
       {children}
     </button>

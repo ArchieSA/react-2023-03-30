@@ -1,10 +1,10 @@
-import { Rating } from "@/components/Rating/Rating";
+import { Rating, MAX_RATING } from "@/components/Rating/Rating";
 import React, { useReducer, useState } from "react";
 
 const initialState = {
   name: "",
   text: "",
-  rating: 5,
+  rating: MAX_RATING,
 };
 
 const reducer = (state, action) => {
@@ -14,9 +14,7 @@ const reducer = (state, action) => {
     case "setText":
       return { ...state, text: action.payload };
     case "setRating":
-      return action.payload > 5
-        ? state
-        : { ...state, rating: Number(action.payload) || 5 };
+      return { ...state, rating: action.payload };
 
     default:
       return state;
@@ -51,6 +49,8 @@ export const NewReviewForm = () => {
         <input
           value={formValue.rating}
           type="number"
+          min={0}
+          max={MAX_RATING}
           onChange={(event) =>
             dispatch({ type: "setRating", payload: event.target.value })
           }

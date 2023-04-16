@@ -1,3 +1,10 @@
+.root {
+  width: fit-content;
+}
 .star:not(:last-child) {
   margin-right: 5px;
+}
+
+.hover {
+  cursor: pointer;
 }

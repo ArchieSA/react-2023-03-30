@@ -17,6 +17,8 @@ const reducer = (state, action) => {
       return action.payload > 5
         ? state
         : { ...state, rating: Number(action.payload) || 5 };
+    case "clickOnStar":
+        return { ...state, rating: action.payload}
 
     default:
       return state;
@@ -60,6 +62,7 @@ export const NewReviewForm = () => {
           onChange={(rating) =>
             dispatch({ type: "setRating", payload: rating })
           }
+          clickOnStarToChangeRating={(rating) => dispatch({type: "clickOnStar", payload: rating})}
         />
       </div>
     </div>

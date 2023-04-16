@@ -4,7 +4,7 @@ import React, { useReducer, useState } from "react";
 const initialState = {
   name: "",
   text: "",
-  rating: 5,
+  rating: 0,
 };
 
 const reducer = (state, action) => {
@@ -14,9 +14,9 @@ const reducer = (state, action) => {
     case "setText":
       return { ...state, text: action.payload };
     case "setRating":
-      return action.payload > 5
+      return action.payload <= -1 
         ? state
-        : { ...state, rating: Number(action.payload) || 5 };
+        : { ...state, rating: Number(action.payload) };
 
     default:
       return state;

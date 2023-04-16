@@ -9,7 +9,7 @@ const minState = 0;
 const maxState = 5;
 
 export const Dish = ({ dish }) => {
-  const [state, setState] = useState(0);
+  const [number, setNumber] = useState(0);
 
   if (!dish) {
     return null;
@@ -20,11 +20,11 @@ export const Dish = ({ dish }) => {
   return (
     <div>
       <span>{name}</span>
-      <Button className={styles.decrementAction} type="secondary" onClick={() => state !== 0 ? setState(state - 1) : minState}>
+      <Button className={styles.decrementAction} type="secondary" onClick={() => number !== 0 ? setNumber(number - 1) : minState}>
         -
       </Button>
-      {state}
-      <Button className={styles.incrementAction} type="primary" onClick={() => state !== 5 ? setState(state + 1) : maxState}>
+      {number}
+      <Button className={styles.incrementAction} type="primary" onClick={() => number !== 5 ? setNumber(number + 1) : maxState}>
         +
       </Button>
     </div>

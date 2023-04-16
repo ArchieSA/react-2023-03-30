@@ -26,8 +26,14 @@ const reducer = (state, action) => {
 export const NewReviewForm = () => {
   const [formValue, dispatch] = useReducer(reducer, initialState);
 
+  const ratingCallback = (e) => {
+    return (Number(e.target.getAttribute('attrindex')) + 1)
+    
+  }
+
   return (
     <div>
+      <h4>Make your feedback</h4>
       <div>
         <label>Name</label>
         <input
@@ -57,6 +63,7 @@ export const NewReviewForm = () => {
         />
         <Rating
           value={formValue.rating}
+          callback={ratingCallback} 
           onChange={(rating) =>
             dispatch({ type: "setRating", payload: rating })
           }

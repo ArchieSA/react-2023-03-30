@@ -1,8 +1,12 @@
 import { Button } from "@/components/Button/Button";
-import { Menu } from "@/components/Menu/Menu";
-import { NewReviewForm } from "@/components/NewReviewForm/NewReviewForm";
-import { Reviews } from "@/components/Reviews/Reviews";
+import { Menu } from "../Menu/menu";
+import { Reviews } from "../Reviews/reviews";
+import { NewReviewForm } from "../NewReviewForm/NewReviewForm";
+import classNames from "classnames";
 import React from "react";
+
+import styles from "./styles.module.scss"
+
 
 export const Restaurant = ({ restaurant }) => {
   if (!restaurant) {
@@ -10,13 +14,15 @@ export const Restaurant = ({ restaurant }) => {
   }
 
   const { name, menu, reviews } = restaurant;
-
+   
   return (
-    <div>
-      <h2>{name}</h2>
-      <Menu menu={menu} />
+    <div className={classNames(styles.root)}>
+      <h2
+        className={classNames(styles.title)}
+      >{name}</h2>
+      <Menu menu={menu}/>
       <Reviews reviews={reviews} />
-      <NewReviewForm />
+      <NewReviewForm/>
     </div>
   );
 };

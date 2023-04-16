@@ -1,12 +1,8 @@
 .root {
   display: flex;
   flex-direction: column;
+  row-gap: 5px;
+  padding-top: 7px;
+  padding-bottom: 7px;
 }
 
-.dishList {
-  margin-top: 15px;
-}
-
-.dish:not(:last-child) {
-  margin-bottom: 10px;
-}

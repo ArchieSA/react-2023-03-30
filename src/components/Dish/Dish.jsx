@@ -1,27 +1,39 @@
-import { Button } from "@/components/Button/Button";
-import React from "react";
-
-import ThumbDown from "./images/thumb-down.svg";
-
-import styles from "./styles.module.scss";
-
+import { Ingredients } from "@/components/Ingredients/ingredients";
+import { DishCount } from "../DishCount/DishCount";
+import React, { useState, useEffect } from "react";
+ 
 export const Dish = ({ dish }) => {
   if (!dish) {
-    return null;
+    return null
   }
 
-  const { name, ingredients } = dish;
+  const { name, price, ingredients } = dish
+  const [dishCounter, setDishCounter] = useState(0)
+  
+  useEffect(() => {
+    dishCounter === 0 && console.log('decrement no permit')
+    dishCounter === 5 && console.log('increment no permit')
+    }, [dishCounter])
+  
+  const counterDecriment = () => {
+    (dishCounter > 0) && setDishCounter(dishCounter - 1)
+  }
+
+  const counterIncrement = () => {
+    (dishCounter < 5) && setDishCounter(dishCounter + 1) 
+  } 
+  
 
   return (
-    <div>
-      <span>{name}</span>
-      <Button className={styles.decrementAction} type="secondary">
-        -
-      </Button>
-      0
-      <Button className={styles.incrementAction} type="primary">
-        +
-      </Button>
+   <div>
+    <h4>{name} : {price}</h4>
+    <DishCount
+      counter={dishCounter}
+      onClickIncrement={counterIncrement}
+      onClickDecrement={counterDecriment}
+    />
+    <div>Ingredients:</div>
+      <Ingredients ingredients = {ingredients} />
     </div>
-  );
-};
+  )
+}

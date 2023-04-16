@@ -1,11 +1,16 @@
 import { Button } from "@/components/Button/Button";
-import React from "react";
+import React, { useState } from "react";
 
 import ThumbDown from "./images/thumb-down.svg";
 
 import styles from "./styles.module.scss";
 
+const minState = 0;
+const maxState = 5;
+
 export const Dish = ({ dish }) => {
+  const [state, setState] = useState(0);
+
   if (!dish) {
     return null;
   }
@@ -15,11 +20,11 @@ export const Dish = ({ dish }) => {
   return (
     <div>
       <span>{name}</span>
-      <Button className={styles.decrementAction} type="secondary">
+      <Button className={styles.decrementAction} type="secondary" onClick={() => state !== 0 ? setState(state - 1) : minState}>
         -
       </Button>
-      0
-      <Button className={styles.incrementAction} type="primary">
+      {state}
+      <Button className={styles.incrementAction} type="primary" onClick={() => state !== 5 ? setState(state + 1) : maxState}>
         +
       </Button>
     </div>

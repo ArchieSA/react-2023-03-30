@@ -7,6 +7,6 @@ export const Dish = ({dish}) => {
 
   const {name, price, ingredients} = dish;
   return (
-    <div>{name}:{price} <ul><b>Ingredient:</b>{ingredients.map( (ingredient) => <li>{ingredient}</li>)}</ul></div>
+    <div>{name}:{price} <ul><b>Ingredient:</b>{ingredients.map( (ingredient, index) => <li key={index}>{ingredient}</li>)}</ul></div>
   )
 }

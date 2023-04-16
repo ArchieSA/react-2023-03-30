@@ -9,7 +9,7 @@ export const Menu = ({ menu }) => {
   return (
     <div>
       <b>Menu:</b>
-      <ol>{menu.map((dish) => <li><Dish key={dish.id} dish={dish} /></li>)}</ol>
+      <ol>{menu.map((dish) => <li key={dish.id}><Dish dish={dish} /></li>)}</ol>
     </div>
   );
 }

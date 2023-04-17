@@ -1,3 +1,4 @@
+import { Rating } from "@/components/Rating/Rating";
 import React from "react";
 
 export const Review = ({ review }) => {
@@ -10,7 +11,7 @@ export const Review = ({ review }) => {
   return (
     <div>
       <p>{user}</p>
-      <p>{rating}</p>
+      <Rating value={rating} />
       <p>{text}</p>
     </div>
   );

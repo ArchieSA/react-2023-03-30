@@ -1,27 +1,39 @@
 import { Button } from "@/components/Button/Button";
-import React from "react";
+import React, { useState } from "react";
 
 import ThumbDown from "./images/thumb-down.svg";
 
 import styles from "./styles.module.scss";
 
-export const Dish = ({ dish }) => {
-  if (!dish) {
-    return null;
-  }
+const MAX_COUNT = 5;
 
-  const { name, ingredients } = dish;
+export const Dish = ({dish}) => {
+    const [count, setCount] = useState(0);
 
-  return (
-    <div>
-      <span>{name}</span>
-      <Button className={styles.decrementAction} type="secondary">
-        -
-      </Button>
-      0
-      <Button className={styles.incrementAction} type="primary">
-        +
-      </Button>
-    </div>
-  );
+    if (!dish) {
+        return null;
+    }
+
+    const {name, ingredients} = dish;
+
+    return (
+        <div>
+            <span>{name}</span>
+            <Button
+                className={styles.decrementAction}
+                type="secondary"
+                disabled={ count <= 0 }
+                onClick={ () => setCount(count - 1) }>
+                -
+            </Button>
+            {count}
+            <Button
+                className={styles.incrementAction}
+                type="primary"
+                disabled={ count >= MAX_COUNT }
+                onClick={ () => setCount(count + 1)}>
+                +
+            </Button>
+        </div>
+    );
 };

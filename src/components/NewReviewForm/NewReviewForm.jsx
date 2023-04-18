@@ -59,8 +59,7 @@ export const NewReviewForm = () => {
           value={formValue.rating}
           onChange={(rating) =>
             dispatch({ type: "setRating", payload: rating })
-          }
-          isFormView={true}
+          }          
         />
       </div>
     </div>

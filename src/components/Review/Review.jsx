@@ -11,7 +11,11 @@ export const Review = ({ review }) => {
   return (
     <div>
       <p>{user}</p>
-      <Rating value={rating} />
+      <Rating
+        value={rating}
+        onChange={(rating) => dispatch({ type: "setRating", payload: rating })}
+        isFormView={false}
+      />
       <p>{text}</p>
     </div>
   );

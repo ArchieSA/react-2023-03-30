@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const MAX_RATING = 5;
 
-export const Rating = ({ value, maxRating = MAX_RATING, className }) => {
+export const Rating = ({ value, onChange, isFormView, maxRating = MAX_RATING, className }) => {
   return (
     <div className={className}>
       {maxRating > 0 &&
@@ -17,6 +17,7 @@ export const Rating = ({ value, maxRating = MAX_RATING, className }) => {
               width={32}
               height={32}
               alt={index >= value ? "black" : "gold"}
+              onClick={() => onChange && isFormView ? onChange(index +1) : null}
             />
           ))}
     </div>

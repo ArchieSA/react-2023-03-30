@@ -3,27 +3,16 @@ import { Header } from "@/components/Header/Header";
 import { Restaurant } from "@/components/Restaurant/Restaurant";
 import { Tabs } from "@/components/Tabs/Tabs";
 import { restaurants } from "@/constants/fixtures";
+import { useActiveRestaurant } from "@/hooks/useActiveRestaurant";
 import React, { useLayoutEffect, useState } from "react";
 
 export const Home = () => {
-  const [activeRestaurantIndex, setActiveRestaurantIndex] = useState(0);
+ const [activeRestaurantIndex, activeRestaurant, setActiveRestaurantIndex] = useActiveRestaurant();
 
-  const setActiveRestaurantIndexWithCache = (index) => {
-    setActiveRestaurantIndex(index);
-    localStorage.setItem("activeRestaurantIndex", index);
-  };
-
-  useLayoutEffect(() => {
-    const savedActiveRestaurantIndex = localStorage.getItem(
-      "activeRestaurantIndex"
-    );
-
-    if (savedActiveRestaurantIndex) {
-      setActiveRestaurantIndex(savedActiveRestaurantIndex);
-    }
-  }, []);
-
-  const activeRestaurant = restaurants[activeRestaurantIndex];
+ const setActiveRestaurantIndexWithCache = (index) => {
+  setActiveRestaurantIndex(index);
+  localStorage.setItem("activeRestaurantIndex", index);
+};
 
   return (
     <div>

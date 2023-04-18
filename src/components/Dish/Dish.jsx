@@ -5,6 +5,9 @@ import styles from "./styles.module.scss";
 import { Ingredients } from "@/components/Ingredients/Ingredients";
 import { useAmount } from "@/hooks/useAmount";
 
+const minState = 0;
+const maxState = 5;
+
 export const Dish = ({ dish }) => {
   const { amount, increment, decrement } = useAmount();
 

@@ -8,6 +8,16 @@
     opacity: 0.9;
     transform: scale(1.05);
   }
+
+  &.disabled {
+    opacity: 0.5;
+    cursor: default;
+
+    &:hover {
+      opacity: 0.5;
+      transform: none;
+    }
+  }
 }
 
 .primary {

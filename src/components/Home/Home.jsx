@@ -1,41 +1,26 @@
-import { Button } from "@/components/Button/Button";
-import { Header } from "@/components/Header/Header";
-import { Restaurant } from "@/components/Restaurant/Restaurant";
-import { Tabs } from "@/components/Tabs/Tabs";
-import { restaurants } from "@/constants/fixtures";
-import React, { useLayoutEffect, useState } from "react";
+import {Header} from "@/components/Header/Header";
+import {Restaurant} from "@/components/Restaurant/Restaurant";
+import {Tabs} from "@/components/Tabs/Tabs";
+import {restaurants} from "@/constants/fixtures";
+import React from "react";
+import {useActiveIndex} from "@/hooks/useActiveIndex";
 
 export const Home = () => {
-  const [activeRestaurantIndex, setActiveRestaurantIndex] = useState(0);
+    const [activeRestaurantIndex, setActiveRestaurantIndex] = useActiveIndex('restaurant', 0)
 
-  const setActiveRestaurantIndexWithCache = (index) => {
-    setActiveRestaurantIndex(index);
-    localStorage.setItem("activeRestaurantIndex", index);
-  };
+    const activeRestaurant = restaurants[activeRestaurantIndex];
 
-  useLayoutEffect(() => {
-    const savedActiveRestaurantIndex = localStorage.getItem(
-      "activeRestaurantIndex"
+    return (
+        <div>
+            <Header/>
+            <Tabs
+                restaurants={restaurants}
+                activeIndex={activeRestaurantIndex}
+                onTabClick={setActiveRestaurantIndex}
+            />
+            {activeRestaurant && (
+                <Restaurant key={activeRestaurant.id} restaurant={activeRestaurant}/>
+            )}
+        </div>
     );
-
-    if (savedActiveRestaurantIndex) {
-      setActiveRestaurantIndex(savedActiveRestaurantIndex);
-    }
-  }, []);
-
-  const activeRestaurant = restaurants[activeRestaurantIndex];
-
-  return (
-    <div>
-      <Header />
-      <Tabs
-        restaurants={restaurants}
-        activeIndex={activeRestaurantIndex}
-        onTabClick={setActiveRestaurantIndexWithCache}
-      />
-      {activeRestaurant && (
-        <Restaurant key={activeRestaurant.id} restaurant={activeRestaurant} />
-      )}
-    </div>
-  );
 };

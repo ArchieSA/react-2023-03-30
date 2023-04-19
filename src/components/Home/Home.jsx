@@ -1,29 +1,12 @@
-import { Button } from "@/components/Button/Button";
+import React from "react";
 import { Header } from "@/components/Header/Header";
 import { Restaurant } from "@/components/Restaurant/Restaurant";
 import { Tabs } from "@/components/Tabs/Tabs";
 import { restaurants } from "@/constants/fixtures";
-import React, { useLayoutEffect, useState } from "react";
+import { useActiveRestaurant } from "@/hooks/useActiveRestaurant";
 
 export const Home = () => {
-  const [activeRestaurantIndex, setActiveRestaurantIndex] = useState(0);
-
-  const setActiveRestaurantIndexWithCache = (index) => {
-    setActiveRestaurantIndex(index);
-    localStorage.setItem("activeRestaurantIndex", index);
-  };
-
-  useLayoutEffect(() => {
-    const savedActiveRestaurantIndex = localStorage.getItem(
-      "activeRestaurantIndex"
-    );
-
-    if (savedActiveRestaurantIndex) {
-      setActiveRestaurantIndex(savedActiveRestaurantIndex);
-    }
-  }, []);
-
-  const activeRestaurant = restaurants[activeRestaurantIndex];
+  const { activeRestaurant, activeRestaurantIndex, setActiveRestaurantIndexWithCache } = useActiveRestaurant();
 
   return (
     <div>

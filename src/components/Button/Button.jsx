@@ -9,21 +9,15 @@ const buttonStyles = {
 };
 
 export function Button({
-  children,
-  disabled,
+  children,  
   type = "primary",
   className,
   onClick,
 }) {
   return (
-    <button
-      onClick={onClick}
-      className={classNames(styles.root, buttonStyles[type], className, {
-        [styles.disabled]: disabled,
-      })}
-      disabled={disabled}
-      onClick={() => !disabled && onClick()}
-      
+    <button      
+      className={classNames(styles.root, buttonStyles[type], className )}      
+      onClick={() => onClick()}      
     >
       {children}
     </button>

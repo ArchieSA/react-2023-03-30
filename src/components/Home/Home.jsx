@@ -6,7 +6,10 @@ import { useRestaurant } from "@/hooks/useRestaurant";
 import React from "react";
 
 export const Home = () => {
-  const [activeRestaurantIndex, setActiveRestaurantIndex] = useRestaurant();
+  const {
+    activeIndex: activeRestaurantIndex,
+    setActiveIndex: setActiveRestaurantIndex,
+  } = useRestaurant();
 
   const activeRestaurant = restaurants[activeRestaurantIndex];
 

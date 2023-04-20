@@ -1,22 +1,23 @@
-import { useLayoutEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useState } from "react";
 
-export const useRestaurant = (initial = 0) => {
-  const [activeRestaurantIndex, setActiveRestaurantIndex] = useState(initial);
+export const useRestaurant = (
+  initial = 0,
+  storageTag = "activeRestaurantIndex"
+) => {
+  const [active, setIndex] = useState(initial);
 
-  const setActiveRestaurantIndexWithCache = (index) => {
-    setActiveRestaurantIndex(index);
-    localStorage.setItem("activeRestaurantIndex", index);
-  };
+  const setIndexWithCache = useCallback((index) => {
+    setIndex(index);
+    localStorage.setItem(storageTag, index);
+  }, []);
 
   useLayoutEffect(() => {
-    const savedActiveRestaurantIndex = localStorage.getItem(
-      "activeRestaurantIndex"
-    );
+    const savedActiveRestaurantIndex = localStorage.getItem(storageTag);
 
     if (savedActiveRestaurantIndex) {
-      setActiveRestaurantIndex(savedActiveRestaurantIndex);
+      setIndex(savedActiveRestaurantIndex);
     }
   }, []);
 
-  return [activeRestaurantIndex, setActiveRestaurantIndexWithCache];
+  return { activeIndex: active, setActiveIndex: setIndexWithCache };
 };

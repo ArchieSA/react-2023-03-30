@@ -1,39 +1,24 @@
-import { Button } from "@/components/Button/Button";
 import { Header } from "@/components/Header/Header";
 import { Restaurant } from "@/components/Restaurant/Restaurant";
 import { Tabs } from "@/components/Tabs/Tabs";
 import { restaurants } from "@/constants/fixtures";
-import React, { useLayoutEffect, useState } from "react";
+import { useTabs } from "@/hooks/useTabs";
 
 export const Home = () => {
-  const [activeRestaurantIndex, setActiveRestaurantIndex] = useState(0);
+  const { isTabsReady, activeTabId, setActiveTabWithCache } =
+    useTabs({tabName: "activeRestaurantID" });
 
-  const setActiveRestaurantIndexWithCache = (index) => {
-    setActiveRestaurantIndex(index);
-    localStorage.setItem("activeRestaurantIndex", index);
-  };
-
-  useLayoutEffect(() => {
-    const savedActiveRestaurantIndex = localStorage.getItem(
-      "activeRestaurantIndex"
-    );
-
-    if (savedActiveRestaurantIndex) {
-      setActiveRestaurantIndex(savedActiveRestaurantIndex);
-    }
-  }, []);
-
-  const activeRestaurant = restaurants[activeRestaurantIndex];
+  const activeRestaurant = restaurants[activeTabId];
 
   return (
     <div>
       <Header />
       <Tabs
         restaurants={restaurants}
-        activeIndex={activeRestaurantIndex}
-        onTabClick={setActiveRestaurantIndexWithCache}
+        activeIndex={activeTabId}
+        onTabClick={setActiveTabWithCache}
       />
-      {activeRestaurant && (
+      {isTabsReady && activeRestaurant && (
         <Restaurant key={activeRestaurant.id} restaurant={activeRestaurant} />
       )}
     </div>

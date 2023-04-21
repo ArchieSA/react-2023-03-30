@@ -3,23 +3,10 @@ import { NewReviewForm } from "@/components/NewReviewForm/NewReviewForm";
 import { Rating } from "@/components/Rating/Rating";
 import { Reviews } from "@/components/Reviews/Reviews";
 import { useAmount } from "@/hooks/useAmount";
-import React, { useEffect, useMemo, useRef } from "react";
-
-const memoizedFunction = (function () {
-  let savedValue;
-
-  return (a, b) => {
-    if (!savedValue) {
-      savedValue = 1 + 1;
-    }
-
-    return savedValue;
-  };
-})();
+import React, { useMemo } from "react";
 
 export const Restaurant = ({ restaurant }) => {
   const { name, menu, reviews } = restaurant || {};
-  const ref = useRef(); // { current: 123 }
 
   const rating = useMemo(
     () =>
@@ -32,23 +19,12 @@ export const Restaurant = ({ restaurant }) => {
     [reviews]
   );
 
-  const restaurantMainInfo = useMemo(() => [name, rating], [name, rating]);
-
-  useEffect(() => {
-    console.log("mainInfoChanged");
-  }, [restaurantMainInfo]);
-
-  useEffect(() => {
-    console.log(ref.current);
-    console.log(ref.current.getBoundingClientRect());
-  }, []);
-
   if (!restaurant) {
     return null;
   }
 
   return (
-    <div ref={ref}>
+    <div>
       <h2>{name}</h2>
       <Rating value={rating} />
       <Menu menu={menu} />

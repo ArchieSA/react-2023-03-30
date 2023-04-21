@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import classNames from "classnames";
 
 import styles from "./styles.module.scss";
+import { ThemeContext } from "@/contexts/ThemeContext/themeContext";
 
 const buttonStyles = {
   primary: styles.primary,
@@ -15,6 +16,8 @@ export function Button({
   className,
   onClick,
 }) {
+  const { theme } = useContext(ThemeContext);
+
   return (
     <button
       onClick={onClick}

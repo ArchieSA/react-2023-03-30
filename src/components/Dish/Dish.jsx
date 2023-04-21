@@ -8,17 +8,24 @@ import ThumbDown from "./images/thumb-down.svg";
 
 import styles from "./styles.module.scss";
 import { Ingredients } from "@/components/Ingredients/Ingredients";
-import { useAmount } from "@/hooks/useAmount";
+import { useDispatch, useSelector } from "@/CustomStore";
 
 const minState = 0;
 const maxState = 5;
 
 export const Dish = ({ dish }) => {
 <<<<<<< HEAD
+<<<<<<< HEAD
   const [state, setState] = useState(0);
 =======
   const { amount, increment, decrement } = useAmount();
 >>>>>>> 1a863a50247fe3a8c55b1cd3bdda01782ebc038b
+=======
+  const amount = useSelector((state) => state[dish.name] || 0);
+  const dispatch = useDispatch();
+  const increment = () => dispatch({ type: "increment", payload: dish.name });
+  const decrement = () => dispatch({ type: "decrement", payload: dish.name });
+>>>>>>> 29a6de83d87f50a480d5fe9e00ab84678c773a86
 
   if (!dish) {
     return null;

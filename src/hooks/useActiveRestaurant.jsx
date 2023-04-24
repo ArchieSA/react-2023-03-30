@@ -1,13 +1,13 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useLayoutEffect, useCallback } from "react";
 import { restaurants } from "@/constants/fixtures";
 
-export const useActiveRestaurant = () => {
-  const [activeRestaurantIndex, setActiveRestaurantIndex] = useState(0);
+export const useActiveRestaurant = (index = 0) => {
+  const [activeRestaurantIndex, setActiveRestaurantIndex] = useState(index);
 
-  const setActiveRestaurantIndexWithCache = (index) => {
+  const setActiveRestaurantIndexWithCache = useCallback((index) => {
     setActiveRestaurantIndex(index);
     localStorage.setItem("activeRestaurantIndex", index);
-  };
+  }, []);
 
   useLayoutEffect(() => {
     const savedActiveRestaurantIndex = localStorage.getItem(

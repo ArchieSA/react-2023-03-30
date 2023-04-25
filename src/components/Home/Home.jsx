@@ -1,6 +1,6 @@
-import { Cart } from "@/components/Cart/Cart";
 import { Header } from "@/components/Header/Header";
 import { restaurants } from "@/constants/fixtures";
+import { CartContainer } from "@/containers/Cart/Cart";
 import { RestaurantContainer } from "@/containers/Restaurant/Restaurant";
 import { RestaurantTabsContainer } from "@/containers/RestaurantTabs/RestaurantTabs";
 import { ThemeContextProvider } from "@/contexts/ThemeContext/ThemeContextProvider";
@@ -24,7 +24,7 @@ export const Home = () => {
             onTabClick={setActiveId}
           />
           {activeId && <RestaurantContainer restaurantId={activeId} />}
-          <Cart />
+          <CartContainer />
         </div>
       </ThemeContextProvider>
     </Provider>

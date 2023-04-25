@@ -1,12 +1,12 @@
 import { Button } from "@/components/Button/Button";
 import React, { useEffect } from "react";
 
-export const Tabs = ({ restaurants, onTabClick }) => {
+export const Tabs = ({ tabs, onTabClick }) => {
   return (
     <div>
-      {restaurants.map((restaurant, index) => (
-        <Button key={restaurant.id} onClick={() => onTabClick(index)}>
-          {restaurant.name}
+      {tabs.map(({ id, title }) => (
+        <Button key={id} onClick={() => onTabClick(id)}>
+          {title}
         </Button>
       ))}
     </div>

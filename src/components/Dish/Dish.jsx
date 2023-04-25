@@ -8,6 +8,7 @@ import ThumbDown from "./images/thumb-down.svg";
 
 import styles from "./styles.module.scss";
 import { Ingredients } from "@/components/Ingredients/Ingredients";
+<<<<<<< HEAD
 import { useDispatch, useSelector } from "@/CustomStore";
 
 const minState = 0;
@@ -26,7 +27,10 @@ export const Dish = ({ dish }) => {
   const increment = () => dispatch({ type: "increment", payload: dish.name });
   const decrement = () => dispatch({ type: "decrement", payload: dish.name });
 >>>>>>> 29a6de83d87f50a480d5fe9e00ab84678c773a86
+=======
+>>>>>>> 5f146e2e920cf3f1835c6c9d09198cfbe90a118d
 
+export const Dish = ({ dish, amount, increment, decrement }) => {
   if (!dish) {
     return null;
   }
@@ -65,10 +69,13 @@ export const Dish = ({ dish }) => {
           +
         </Button>
       </div>
+<<<<<<< HEAD
       {amount > 0 && (
         <Ingredients ingredients={ingredients} className={styles.ingredients} />
       )}
 >>>>>>> 1a863a50247fe3a8c55b1cd3bdda01782ebc038b
+=======
+>>>>>>> 5f146e2e920cf3f1835c6c9d09198cfbe90a118d
     </div>
   );
 };

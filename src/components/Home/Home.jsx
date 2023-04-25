@@ -1,35 +1,29 @@
-import { Provider } from "@/CustomStore";
-import { Button } from "@/components/Button/Button";
 import { Cart } from "@/components/Cart/Cart";
 import { Header } from "@/components/Header/Header";
-import { Restaurant } from "@/components/Restaurant/Restaurant";
-import { Tabs } from "@/components/Tabs/Tabs";
 import { restaurants } from "@/constants/fixtures";
+import { RestaurantContainer } from "@/containers/Restaurant/Restaurant";
+import { RestaurantTabsContainer } from "@/containers/RestaurantTabs/RestaurantTabs";
 import { ThemeContextProvider } from "@/contexts/ThemeContext/ThemeContextProvider";
-import { ThemeContext } from "@/contexts/ThemeContext/themeContext";
-import { useActiveIndex } from "@/hooks/useActiveIndex";
+import { useActiveId } from "@/hooks/useActiveIndex";
 import { store } from "@/store";
-import React, { useState } from "react";
+import React from "react";
+import { Provider } from "react-redux";
 
 export const Home = () => {
-  const { activeIndex, setActiveIndex } = useActiveIndex({
-    storageName: "activeRestaurantIndex",
+  const { activeId, setActiveId } = useActiveId({
+    storageName: "activeRestaurantId",
   });
-
-  const activeRestaurant = restaurants[activeIndex];
 
   return (
     <Provider store={store}>
       <ThemeContextProvider>
         <div>
           <Header />
-          <Tabs restaurants={restaurants} onTabClick={setActiveIndex} />
-          {activeRestaurant && (
-            <Restaurant
-              key={activeRestaurant.id}
-              restaurant={activeRestaurant}
-            />
-          )}
+          <RestaurantTabsContainer
+            restaurants={restaurants}
+            onTabClick={setActiveId}
+          />
+          {activeId && <RestaurantContainer restaurantId={activeId} />}
           <Cart />
         </div>
       </ThemeContextProvider>

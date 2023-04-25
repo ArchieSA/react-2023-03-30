@@ -1,14 +1,14 @@
 import { useCallback, useLayoutEffect, useState } from "react";
 
-export const useActiveIndex = ({ initialActiveIndex = 0, storageName }) => {
-  const [activeIndex, setActiveIndex] = useState(initialActiveIndex);
+export const useActiveId = ({ initialActiveId, storageName }) => {
+  const [activeId, setActiveId] = useState(initialActiveId);
 
-  const setActiveIndexWithCache = useCallback(
-    (index) => {
-      setActiveIndex(index);
+  const setActiveIdWithCache = useCallback(
+    (id) => {
+      setActiveId(id);
 
       if (storageName) {
-        localStorage.setItem(storageName, index);
+        localStorage.setItem(storageName, id);
       }
     },
     [storageName]
@@ -16,16 +16,16 @@ export const useActiveIndex = ({ initialActiveIndex = 0, storageName }) => {
 
   useLayoutEffect(() => {
     if (storageName) {
-      const savedActiveIndex = Number(localStorage.getItem(storageName));
+      const savedActiveId = localStorage.getItem(storageName);
 
-      if (savedActiveIndex) {
-        setActiveIndex(savedActiveIndex);
+      if (savedActiveId) {
+        setActiveId(savedActiveId);
       }
     }
   }, []);
 
   return {
-    activeIndex,
-    setActiveIndex: setActiveIndexWithCache,
+    activeId,
+    setActiveId: setActiveIdWithCache,
   };
 };

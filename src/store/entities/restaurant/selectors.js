@@ -10,3 +10,6 @@ export const selectRestaurants = (state) =>
 
 export const selectMenuByRestaurantId = (state, { restaurantId }) =>
   selectRestaurantById(state, { restaurantId })?.menu;
+
+export const selectReviewsByRestaurantId = (state, { restaurantId }) =>
+  selectRestaurantById(state, { restaurantId })?.reviews;

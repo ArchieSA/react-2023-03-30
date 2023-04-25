@@ -1,4 +1,4 @@
 export const selectUsers = (state) => state.user;
 
-export const selectReviewById = (state, { userId }) =>
+export const selectUserById = (state, { userId }) =>
   selectUsers(state).entities[userId];

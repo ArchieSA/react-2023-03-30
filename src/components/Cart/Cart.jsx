@@ -1,7 +1,8 @@
 import React from "react";
 import { DishContainer } from "@/containers/Dish/Dish";
 
-export const Cart = (cartState) => { 
+export const Cart = ({cartState}) => { 
+  console.log(cartState)
 
   return (
     <div>

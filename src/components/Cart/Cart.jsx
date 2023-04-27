@@ -1,10 +1,8 @@
-import { useSelector } from "react-redux";
 import React from "react";
-import { selectCartModule } from "@/store/ui/cart/selectors";
 import { DishContainer } from "@/containers/Dish/Dish";
 
-export const Cart = () => {
-  const cartState = useSelector(selectCartModule);
+export const Cart = ({cartState}) => { 
+  console.log(cartState)
 
   return (
     <div>

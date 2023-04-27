@@ -1,4 +1,4 @@
-import { Cart } from "@/components/Cart/Cart";
+import { CartContainer } from "@/containers/Cart/Cart";
 import { Header } from "@/components/Header/Header";
 import { restaurants } from "@/constants/fixtures";
 import { RestaurantContainer } from "@/containers/Restaurant/Restaurant";
@@ -8,6 +8,7 @@ import { useActiveId } from "@/hooks/useActiveIndex";
 import { store } from "@/store";
 import React from "react";
 import { Provider } from "react-redux";
+import { Reviews } from "../Reviews/Reviews";
 
 export const Home = () => {
   const { activeId, setActiveId } = useActiveId({
@@ -24,7 +25,7 @@ export const Home = () => {
             onTabClick={setActiveId}
           />
           {activeId && <RestaurantContainer restaurantId={activeId} />}
-          <Cart />
+          <CartContainer />
         </div>
       </ThemeContextProvider>
     </Provider>

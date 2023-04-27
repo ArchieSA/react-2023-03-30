@@ -1,4 +1,5 @@
 import { Rating } from "@/components/Rating/Rating";
+import { UserContainer } from "@/containers/User/User";
 import React from "react";
 
 export const Review = ({ review }) => {
@@ -6,13 +7,13 @@ export const Review = ({ review }) => {
     return null;
   }
 
-  const { user, text, rating } = review;
+  const { userId, text, rating } = review;
 
   return (
     <div>
-      <p>{user}</p>
       <Rating value={rating} />
       <p>{text}</p>
+      <UserContainer userId={userId}/>
     </div>
   );
 };

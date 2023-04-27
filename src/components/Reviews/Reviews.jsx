@@ -1,5 +1,6 @@
 import { Review } from "@/components/Review/Review";
 import React from "react";
+import {ReviewContainer} from "@/containers/Review/Review";
 
 export const Reviews = ({ reviews }) => {
   if (!reviews?.length) {
@@ -10,9 +11,9 @@ export const Reviews = ({ reviews }) => {
     <div>
       <h3>Reviews</h3>
       <ul>
-        {reviews.map((review) => (
-          <li key={review?.id}>
-            <Review review={review} />
+        {reviews.map((reviewId) => (
+          <li key={reviewId}>
+            <ReviewContainer reviewId={reviewId} />
           </li>
         ))}
       </ul>

@@ -1,18 +1,14 @@
 import { Rating } from "@/components/Rating/Rating";
 import React from "react";
+import { UserContainer } from "@/containers/User/UserContainer";
 
-export const Review = ({ review }) => {
-  if (!review) {
-    return null;
-  }
-
-  const { user, text, rating } = review;
+export const Review = ({ userId, text, rating }) => {
 
   return (
     <div>
-      <p>{user}</p>
-      <Rating value={rating} />
-      <p>{text}</p>
+      <UserContainer userId={ userId }/>
+      <Rating value={ rating } />
+      <p>{ text }</p>
     </div>
   );
 };

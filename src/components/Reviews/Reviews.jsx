@@ -1,4 +1,4 @@
-import { Review } from "@/components/Review/Review";
+import { ReviewContainer } from "@/containers/Review/Review";
 import React from "react";
 
 export const Reviews = ({ reviews }) => {
@@ -10,9 +10,9 @@ export const Reviews = ({ reviews }) => {
     <div>
       <h3>Reviews</h3>
       <ul>
-        {reviews.map((review) => (
-          <li key={review?.id}>
-            <Review review={review} />
+        {reviews.map((reviewId) => (
+          <li key={reviewId}>
+            <ReviewContainer reviewId={reviewId}/>
           </li>
         ))}
       </ul>

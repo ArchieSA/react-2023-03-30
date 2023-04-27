@@ -3,6 +3,7 @@ import { NewReviewForm } from "@/components/NewReviewForm/NewReviewForm";
 import { Rating } from "@/components/Rating/Rating";
 import { Reviews } from "@/components/Reviews/Reviews";
 import { RestaurantMenuContainer } from "@/containers/RestaurantMenu/RestaurantMenu";
+import { RestaurantRewiewsContainer } from "@/containers/RestaurantReviewsContainer/RestaurantReviews";
 import { useAmount } from "@/hooks/useAmount";
 import React, { useMemo } from "react";
 
@@ -25,6 +26,7 @@ export const Restaurant = ({ restaurant }) => {
       <h2>{name}</h2>
       {/* <Rating value={rating} /> */}
       <RestaurantMenuContainer restaurantId={id} />
+      <RestaurantRewiewsContainer restaurantId={id} />
       {/* <Reviews reviews={reviews} /> */}
       <NewReviewForm />
     </div>

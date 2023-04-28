@@ -1,5 +1,7 @@
-import { Review } from "@/components/Review/Review";
+import { ReviewContainer } from "@/containers/Review/Review";
 import React from "react";
+
+import styles from "./styles.module.scss";
 
 export const Reviews = ({ reviews }) => {
   if (!reviews?.length) {
@@ -9,13 +11,15 @@ export const Reviews = ({ reviews }) => {
   return (
     <div>
       <h3>Reviews</h3>
-      <ul>
-        {reviews.map((review) => (
-          <li key={review?.id}>
-            <Review review={review} />
-          </li>
+      <div>
+        {reviews.map((reviewId) => (
+          <ReviewContainer
+            key={reviewId}
+            reviewId={reviewId}
+            className={styles.review}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 };

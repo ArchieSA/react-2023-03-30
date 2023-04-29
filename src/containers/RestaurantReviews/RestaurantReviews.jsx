@@ -13,8 +13,6 @@ export const RestaurantReviewsContainer = ({ restaurantId }) => {
 
   const isLoading = useSelector((state) => selectIsReviewLoading(state));
 
-  console.log("isLoading", isLoading);
-
   useEffect(() => {
     if (restaurantId) dispatch(loadReviewByRestaurantId(restaurantId));
   }, [dispatch, restaurantId]);

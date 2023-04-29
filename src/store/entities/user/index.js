@@ -16,15 +16,16 @@ export const userSlice = createSlice({
       state.isLoading = LOADING_STATUS.inProgress;
     },
     finishLoading: (state, { payload }) => {
-      (state.entities = {
+      state.entities = {
         ...state.entities,
         ...payload.reduce((acc, user) => {
           acc[user.id] = user;
 
           return acc;
         }, {}),
-      }),
-        (state.ids = payload.map(({ id }) => id));
+      };
+      state.ids = payload.map(({ id }) => id);
+      state.isLoading = LOADING_STATUS.inProgress;
     },
     failLoading: (state) => {
       state.isLoading = LOADING_STATUS.failed;

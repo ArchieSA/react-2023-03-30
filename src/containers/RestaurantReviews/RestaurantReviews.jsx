@@ -1,13 +1,27 @@
 import { Reviews } from "@/components/Reviews/Reviews";
-import { ReviewContainer } from "@/containers/Review/Review";
 import { selectReviewsByRestaurantId } from "@/store/entities/restaurant/selectors";
-import React from "react";
-import { useSelector } from "react-redux";
+import { selectIsReviewLoading } from "@/store/entities/review/selectors";
+import { loadReviewByRestaurantId } from "@/store/entities/review/thunk/loadReviewByRestaurantId";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export const RestaurantReviewsContainer = ({ restaurantId }) => {
   const reviews = useSelector((state) =>
     selectReviewsByRestaurantId(state, { restaurantId })
   );
+  const dispatch = useDispatch();
+
+  const isLoading = useSelector((state) => selectIsReviewLoading(state));
+
+  console.log("isLoading", isLoading);
+
+  useEffect(() => {
+    if (restaurantId) dispatch(loadReviewByRestaurantId(restaurantId));
+  }, [dispatch, restaurantId]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   if (!reviews?.length) {
     return null;

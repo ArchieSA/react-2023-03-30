@@ -7,9 +7,6 @@ const initialState = {
   isLoading: LOADING_STATUS.idle,
 };
 
-// export const reviewReducer = (state = initialState, action) => {
-//   return state;
-// };
 export const reviewSlice = createSlice({
   name: "review",
   initialState,
@@ -26,7 +23,7 @@ export const reviewSlice = createSlice({
           return acc;
         }, {}),
       };
-      state.ids = payload.map(({ id }) => id);
+      state.ids = [...new Set([...payload.map(({ id }) => id), ...state.ids])];
       state.isLoading = LOADING_STATUS.finished;
     },
     failLoading: (state, { payload }) => {

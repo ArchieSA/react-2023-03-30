@@ -3,25 +3,25 @@ import { selectReviewsByRestaurantId } from "../../restaurant/selectors";
 import { selectReviewIds } from "../selectors";
 
 export const loadReviewByRestaurantId =
-  (reataurantId) => (dispatch, getState) => {
-    const state = getState();
-    const reviewRestaurantIds = selectReviewsByRestaurantId(state, {
-      reataurantId,
+  (restaurantId) => (dispatch, getState) => {
+    const reviewRestaurantIds = selectReviewsByRestaurantId(getState(), {
+      restaurantId,
     });
-    const reviewExistedIds = selectReviewIds(state);
-
+    const reviewExistedIds = selectReviewIds(getState());
     const reviewsToLoad = reviewRestaurantIds?.length
       ? reviewRestaurantIds.reduce((acc, id) => {
-          reviewExistedIds.includes(id) || acc.push(id);
+          if (!reviewExistedIds.includes(id)) {
+            acc.push(id);
+          }
           return acc;
         }, [])
       : [];
 
     // we can load only new reviews here, but no such fns at the backend.
-    if (!reviewsToLoad.length) {
+    if (reviewsToLoad.length) {
       dispatch(reviewSlice.actions.startLoading());
       fetch(
-        "http://localhost:3001/api/reviews?restaurantId=".concat(reataurantId)
+        "http://localhost:3001/api/reviews?restaurantId=".concat(restaurantId)
       )
         .then((result) => result.json())
         .then((reviews) => {

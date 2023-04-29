@@ -1,14 +1,34 @@
+import { LOADING_STATUS } from "@/constants/loading-status";
 import { normalizedUsers } from "@/constants/normalized-fixtures";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  entities: normalizedUsers.reduce((acc, user) => {
-    acc[user.id] = user;
-
-    return acc;
-  }, {}),
-  ids: normalizedUsers.map(({ id }) => id),
+  entities: {},
+  ids: [],
+  isLoading: LOADING_STATUS.idle,
 };
 
-export const userReducer = (state = initialState, action) => {
-  return state;
-};
+export const userSlice = createSlice({
+  name: "user",
+  initialState,
+  reducers: {
+    startLoading: (state) => {
+      state.isLoading = LOADING_STATUS.inProgress;
+    },
+    finishLoading: (state, { payload }) => {
+      state.entities = {
+        ...state.entities,
+        ...payload.reduce((acc, user) => {
+          acc[user.id] = user;
+
+          return acc;
+        }, {}),
+      };
+      state.ids = payload.map(({ id }) => id);
+      state.isLoading = LOADING_STATUS.inProgress;
+    },
+    failLoading: (state) => {
+      state.isLoading = LOADING_STATUS.failed;
+    },
+  },
+});

@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const useActiveId = ({ initialActiveId, storageName }) => {
   const [activeId, setActiveId] = useState(initialActiveId);
@@ -14,7 +14,7 @@ export const useActiveId = ({ initialActiveId, storageName }) => {
     [storageName]
   );
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (storageName) {
       const savedActiveId = localStorage.getItem(storageName);
 

@@ -3,8 +3,8 @@ import React from "react";
 
 import styles from "./styles.module.scss";
 
-export const Reviews = ({ reviews }) => {
-  if (!reviews?.length) {
+export const Reviews = ({ reviewIds }) => {
+  if (!reviewIds?.length) {
     return null;
   }
 
@@ -12,7 +12,7 @@ export const Reviews = ({ reviews }) => {
     <div>
       <h3>Reviews</h3>
       <div>
-        {reviews.map((reviewId) => (
+        {reviewIds.map((reviewId) => (
           <ReviewContainer
             key={reviewId}
             reviewId={reviewId}

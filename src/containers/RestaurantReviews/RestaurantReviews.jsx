@@ -1,17 +1,35 @@
 import { Reviews } from "@/components/Reviews/Reviews";
-import { ReviewContainer } from "@/containers/Review/Review";
 import { selectReviewsByRestaurantId } from "@/store/entities/restaurant/selectors";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { loadReviewByRestaurantIdIfNotExisted } from '@/store/entities/review/thunk/loadReviewByRestaurantIdIfNotExisted.js'
+import { selectIsReviewLoading } from '@/store/entities/review/selectors.js'
+import { selectIsUserLoading } from '@/store/entities/user/selectors.js'
+import { loadUserIfNotExisted } from '@/store/entities/user/thunk/loadUserIfNotExisted.js'
 
 export const RestaurantReviewsContainer = ({ restaurantId }) => {
-  const reviews = useSelector((state) =>
+  const dispatch = useDispatch();
+  const reviewIds = useSelector((state) =>
     selectReviewsByRestaurantId(state, { restaurantId })
   );
 
-  if (!reviews?.length) {
+  const isLoadingUsers = useSelector(selectIsUserLoading);
+  const isLoadingReviews = useSelector(selectIsReviewLoading);
+
+  useEffect(() => {
+    dispatch(loadUserIfNotExisted());
+    dispatch(loadReviewByRestaurantIdIfNotExisted(restaurantId));
+  }, [dispatch, restaurantId]);
+
+  if (!reviewIds?.length) {
     return null;
   }
 
-  return <Reviews reviews={reviews} />;
+  if (isLoadingUsers || isLoadingReviews) {
+    return <span>{`${ isLoadingUsers ? 'Loading Users... ':''} ${isLoadingReviews ? 'Loading Reviews...':''}`}<br/></span>;
+  }
+
+
+  return <Reviews reviewIds={reviewIds} />;
 };

@@ -21,7 +21,7 @@ export const RestaurantMenuContainer = ({ restaurantId }) => {
   }
 
   if (isLoading) {
-    return <span>Loading...</span>;
+    return <span>Loading Menu...<br/></span>;
   }
 
   return <Menu menu={menu} />;

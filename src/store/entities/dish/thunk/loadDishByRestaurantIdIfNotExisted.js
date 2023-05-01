@@ -1,6 +1,7 @@
 import { dishSlice } from "@/store/entities/dish";
 import { selectDishIds } from "@/store/entities/dish/selectors";
 import { selectMenuByRestaurantId } from "@/store/entities/restaurant/selectors";
+import { loadingByApi } from '@/libs/back-actions.js'
 
 export const loadDishByRestaurantIdIfNotExisted =
   (restaurantId) => (dispatch, getState) => {
@@ -13,10 +14,5 @@ export const loadDishByRestaurantIdIfNotExisted =
       return;
     }
 
-    dispatch(dishSlice.actions.startLoading());
-
-    fetch(`http://localhost:3001/api/dishes?restaurantId=${restaurantId}`)
-      .then((response) => response.json())
-      .then((dishes) => dispatch(dishSlice.actions.finishLoading(dishes)))
-      .catch(() => dispatch(dishSlice.actions.failLoading()));
+    loadingByApi(`http://localhost:3001/api/dishes?restaurantId=${restaurantId}`, { dispatch, slice: dishSlice })
   };

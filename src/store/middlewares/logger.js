@@ -1,5 +1,5 @@
 export const logger = (store) => (next) => (action) => {
-  console.log("action", action);
+  console.log("logger => action => ", action);
 
   next(action);
 };

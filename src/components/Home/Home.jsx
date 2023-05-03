@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-import { CartContainer } from "@/containers/Cart/Cart";
-=======
->>>>>>> 24831b1ccea2d39ee5c37958571f20f48499064f
 import { Header } from "@/components/Header/Header";
 import { restaurants } from "@/constants/fixtures";
 import { CartContainer } from "@/containers/Cart/Cart";
@@ -10,11 +6,7 @@ import { RestaurantTabsContainer } from "@/containers/RestaurantTabs/RestaurantT
 import { ThemeContextProvider } from "@/contexts/ThemeContext/ThemeContextProvider";
 import { useActiveId } from "@/hooks/useActiveIndex";
 import React from "react";
-<<<<<<< HEAD
-import { Provider } from "react-redux";
-import { Reviews } from "../Reviews/Reviews";
-=======
->>>>>>> 24831b1ccea2d39ee5c37958571f20f48499064f
+
 
 export const Home = () => {
   const { activeId, setActiveId } = useActiveId({
@@ -22,8 +14,6 @@ export const Home = () => {
   });
 
   return (
-<<<<<<< HEAD
-    <Provider store={store}>
       <ThemeContextProvider>
         <div>
           <Header />
@@ -35,19 +25,5 @@ export const Home = () => {
           <CartContainer />
         </div>
       </ThemeContextProvider>
-    </Provider>
-=======
-    <ThemeContextProvider>
-      <div>
-        <Header />
-        <RestaurantTabsContainer
-          restaurants={restaurants}
-          onTabClick={setActiveId}
-        />
-        {activeId && <RestaurantContainer restaurantId={activeId} />}
-        <CartContainer />
-      </div>
-    </ThemeContextProvider>
->>>>>>> 24831b1ccea2d39ee5c37958571f20f48499064f
   );
 };

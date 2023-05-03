@@ -1,5 +1,4 @@
 import { LOADING_STATUS } from "@/constants/loading-status";
-import { normalizedDishes } from "@/constants/normalized-fixtures";
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {

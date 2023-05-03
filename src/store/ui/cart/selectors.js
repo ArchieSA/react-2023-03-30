@@ -1,4 +1,10 @@
-export const selectCartModule = (state) => state.cart;
+export const selectCartModule = (state) => {
+  
+  return state.cart;
+};
 
-export const selectDishAmount = (state, { dishId }) =>
-  selectCartModule(state)[dishId] || 0;
+export const selectDishAmount = (state, { dishId }) => {
+  
+  return selectCartModule(state)[dishId] || 0;
+}
+  

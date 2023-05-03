@@ -4,9 +4,11 @@ import { selectMenuByRestaurantId } from "@/store/entities/restaurant/selectors"
 
 export const loadDishByRestaurantIdIfNotExisted =
   (restaurantId) => (dispatch, getState) => {
+
     const restaurantMenu = selectMenuByRestaurantId(getState(), {
       restaurantId,
     });
+    
     const dishIds = selectDishIds(getState());
 
     if (restaurantMenu.every((dishId) => dishIds.includes(dishId))) {

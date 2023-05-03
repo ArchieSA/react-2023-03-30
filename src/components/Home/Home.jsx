@@ -7,22 +7,23 @@ import { ThemeContextProvider } from "@/contexts/ThemeContext/ThemeContextProvid
 import { useActiveId } from "@/hooks/useActiveIndex";
 import React from "react";
 
+
 export const Home = () => {
   const { activeId, setActiveId } = useActiveId({
     storageName: "activeRestaurantId",
   });
 
   return (
-    <ThemeContextProvider>
-      <div>
-        <Header />
-        <RestaurantTabsContainer
-          restaurants={restaurants}
-          onTabClick={setActiveId}
-        />
-        {activeId && <RestaurantContainer restaurantId={activeId} />}
-        <CartContainer />
-      </div>
-    </ThemeContextProvider>
+      <ThemeContextProvider>
+        <div>
+          <Header />
+          <RestaurantTabsContainer
+            restaurants={restaurants}
+            onTabClick={setActiveId}
+          />
+          {activeId && <RestaurantContainer restaurantId={activeId} />}
+          <CartContainer />
+        </div>
+      </ThemeContextProvider>
   );
 };

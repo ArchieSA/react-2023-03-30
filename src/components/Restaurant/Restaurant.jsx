@@ -4,18 +4,7 @@ import { RestaurantReviewsContainer } from "@/containers/RestaurantReviews/Resta
 import React from "react";
 
 export const Restaurant = ({ restaurant }) => {
-  const { name, id } = restaurant || {};
-
-  // const rating = useMemo(
-  //   () =>
-  //     !!reviews?.length
-  //       ? Math.floor(
-  //           reviews.reduce((acc, review) => acc + review.rating, 0) /
-  //             reviews.length
-  //         )
-  //       : 0,
-  //   [reviews]
-  // );
+  const { name, id, reviews } = restaurant || {};
 
   return (
     <div>

@@ -7,8 +7,8 @@ const initialState = {
   loadingStatus: LOADING_STATUS.idle,
 };
 
-export const userSlice = createSlice({
-  name: 'user',
+export const reviewsSlice = createSlice({
+  name: 'reviews',
   initialState,
   reducers: {
     startLoading: (state) => {
@@ -18,8 +18,8 @@ export const userSlice = createSlice({
       state.loadingStatus = LOADING_STATUS.finished;
       state.entities = {
         ...state.entities,
-        ...payload.reduce((acc, user) => {
-          acc[user.id] = user;
+        ...payload.reduce((acc, review) => {
+          acc[review.id] = review;
 
           return acc;
         }, {}),

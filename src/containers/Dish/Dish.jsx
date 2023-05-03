@@ -6,8 +6,9 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 export const DishContainer = ({ dishId }) => {
+  
   const dish = useSelector((state) => selectDishById(state, { dishId }));
-  const amount = useSelector((state) => selectDishAmount(state, { dishId }));
+  const amount = useSelector((state) => selectDishAmount(state,  { dishId } ));
   const dispatch = useDispatch();
   const increment = () => dispatch(incrementDish(dishId));
   const decrement = () => dispatch(decrementDish(dishId));

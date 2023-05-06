@@ -7,7 +7,7 @@ export const CartContainer = () => {
   const cart = useSelector(selectCartModule);
 
   if (!Object.keys(cart || {}).length) {
-    return null;
+    return <div>No dishes in the cart.</div>;
   }
 
   return <Cart cart={cart} />;

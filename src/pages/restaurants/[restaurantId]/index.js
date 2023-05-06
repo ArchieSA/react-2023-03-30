@@ -1,4 +1,4 @@
-import { RestaurantContainer } from "@/containers/Dish/Restaurant/Restaurant";
+import { RestaurantContainer } from "@/containers/Restaurant/Restaurant";
 import { useRouter } from "next/router";
 
 export default function CurrentRestaurantsPage() {

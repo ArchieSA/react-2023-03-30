@@ -5,14 +5,15 @@ import React from "react";
 
 export const Restaurant = ({ restaurant }) => {
   const { asPath } = useRouter();
-  const { name, id } = restaurant || {};
+  const { name, reviews } = restaurant || {};
 
   return (
     <div>
       <h2>{name}</h2>
-      {/* <RestaurantReviewsContainer restaurantId={id} /> */}
       <p>
-        <Link href={`${asPath}/reviews`}>Reviews</Link>
+        <Link href={`${asPath}/reviews`}>
+          Reviews{` (${reviews?.length})` || ""}
+        </Link>
       </p>
       <p p>
         <Link href={`${asPath}/menu`}>Open menu</Link>

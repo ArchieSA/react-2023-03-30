@@ -1,5 +1,4 @@
 import { LOADING_STATUS } from "@/constants/loading-status";
-import { dishSlice } from "@/store/entities/dish";
 import { selectDishIds } from "@/store/entities/dish/selectors";
 import { selectMenuByRestaurantId } from "@/store/entities/restaurant/selectors";
 import { createAsyncThunk } from "@reduxjs/toolkit";

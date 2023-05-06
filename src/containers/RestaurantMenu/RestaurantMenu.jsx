@@ -16,6 +16,7 @@ export const RestaurantMenuContainer = ({ restaurantId }) => {
   const isLoading = useSelector(selectIsDishLoading);
 
   useEffect(() => {
+    console.log("fetchDishByRestaurantId start");
     dispatch(fetchDishByRestaurantId(restaurantId));
   }, [dispatch, restaurantId]);
 

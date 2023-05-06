@@ -1,5 +1,4 @@
 import { LOADING_STATUS } from "@/constants/loading-status";
-import { dishSlice } from "@/store/entities/dish";
 import { selectDishIds } from "@/store/entities/dish/selectors";
 import { selectMenuByRestaurantId } from "@/store/entities/restaurant/selectors";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -13,7 +12,10 @@ export const fetchDishByRestaurantId = createAsyncThunk(
     });
     const dishIds = selectDishIds(state);
 
-    if (restaurantMenu.every((dishId) => dishIds.includes(dishId))) {
+    if (
+      restaurantMenu &&
+      restaurantMenu.every((dishId) => dishIds.includes(dishId))
+    ) {
       return rejectWithValue(LOADING_STATUS.earlyAdded);
     }
 

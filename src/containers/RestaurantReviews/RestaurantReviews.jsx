@@ -1,33 +1,50 @@
 import { Reviews } from "@/components/Reviews/Reviews";
-import { selectReviewsByRestaurantId } from "@/store/entities/restaurant/selectors";
+import {
+  selectIsRestaurantLoading,
+  selectNameByRestaurantId,
+  selectReviewsByRestaurantId,
+} from "@/store/entities/restaurant/selectors";
+import { fetchRestaurant } from "@/store/entities/restaurant/thunks/fetchRestaurant";
 import { selectIsReviewLoading } from "@/store/entities/review/selectors";
-import { loadReviewsByRestaurantIdIfNotExisted } from "@/store/entities/review/thunks/loadReviewsByRestaurantIdIfNotExisted";
-import { loadUserIfNotExisted } from "@/store/entities/user/thunks/loadUserIfNotExisted";
+import { fetchReviewsByRestaurantId } from "@/store/entities/review/thunks/fetchReviewsByRestaurantId";
+import { fetchUsers } from "@/store/entities/user/thunks/fetchUsers";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { restaurants } from "../../../forLessons/fixtures";
 
 export const RestaurantReviewsContainer = ({ restaurantId }) => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsReviewLoading);
+  const isRestaurantLoading = useSelector(selectIsRestaurantLoading);
   const reviews = useSelector((state) =>
     selectReviewsByRestaurantId(state, { restaurantId })
   );
-  const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsReviewLoading);
+  const restaurantName = useSelector((state) =>
+    selectNameByRestaurantId(state, { restaurantId })
+  );
 
   useEffect(() => {
-    dispatch(loadReviewsByRestaurantIdIfNotExisted(restaurantId));
+    if (restaurantId) dispatch(fetchReviewsByRestaurantId(restaurantId));
   }, [dispatch, restaurantId]);
 
   useEffect(() => {
-    dispatch(loadUserIfNotExisted());
+    dispatch(fetchRestaurant());
+    dispatch(fetchUsers());
   }, [dispatch]);
 
-  if (!reviews?.length) {
-    return null;
-  }
-
-  if (isLoading) {
+  if (isLoading && isRestaurantLoading) {
     return <span>Loading...</span>;
   }
+  if (!reviews?.length) {
+    return "No reviews";
+  }
 
-  return <Reviews reviews={reviews} />;
+  return (
+    <>
+      <div>
+        <h2>{restaurantName}</h2>
+      </div>
+      <Reviews reviews={reviews} />
+    </>
+  );
 };

@@ -18,6 +18,9 @@ export const Header = ({ className }) => {
         <Link href="/restaurants" className={styles.link}>
           Restaurants
         </Link>
+        <Link href="/cart" className={styles.link}>
+          Cart
+        </Link>
       </div>
     </header>
   );

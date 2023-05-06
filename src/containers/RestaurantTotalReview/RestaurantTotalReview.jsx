@@ -1,38 +1,34 @@
 import { Reviews } from "@/components/Reviews/Reviews";
-import {
-  selectIsRestaurantLoading,
-  selectReviewsByRestaurantId,
-} from "@/store/entities/restaurant/selectors";
-import { fetchRestaurant } from "@/store/entities/restaurant/thunks/fetchRestaurant";
+import { selectReviewsByRestaurantId } from "@/store/entities/restaurant/selectors";
 import { selectIsReviewLoading } from "@/store/entities/review/selectors";
 import { fetchReviewsByRestaurantId } from "@/store/entities/review/thunks/fetchReviewsByRestaurantId";
 import { fetchUsers } from "@/store/entities/user/thunks/fetchUsers";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export const RestaurantReviewsContainer = ({ restaurantId }) => {
-  const dispatch = useDispatch();
-  const isLoading = useSelector(selectIsReviewLoading);
-  const isRestaurantLoading = useSelector(selectIsRestaurantLoading);
+export const RestaurantTotalReviewContainer = ({ restaurantId }) => {
   const reviews = useSelector((state) =>
     selectReviewsByRestaurantId(state, { restaurantId })
   );
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectIsReviewLoading);
 
   useEffect(() => {
-    if (restaurantId) dispatch(fetchReviewsByRestaurantId(restaurantId));
+    dispatch(fetchReviewsByRestaurantId(restaurantId));
   }, [dispatch, restaurantId]);
 
   useEffect(() => {
-    dispatch(fetchRestaurant());
     dispatch(fetchUsers());
   }, [dispatch]);
 
-  if (isLoading && isRestaurantLoading) {
+  if (!reviews?.length) {
+    return null;
+  }
+
+  if (isLoading) {
     return <span>Loading...</span>;
   }
-  if (!reviews?.length) {
-    return "No reviews";
-  }
+  console.log("reviews", reviews);
 
   return <Reviews reviews={reviews} />;
 };

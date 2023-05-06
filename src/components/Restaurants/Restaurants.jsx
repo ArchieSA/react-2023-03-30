@@ -10,7 +10,7 @@ export const Restaurants = ({ restaurantIds }) => {
         <Link
           key={restaurantId}
           href={{
-            pathname: "/restaurants/[restaurantId]",
+            pathname: "/restaurants/[restaurantId]/",
             query: { restaurantId },
           }}
         >

@@ -12,7 +12,10 @@ export const fetchDishByRestaurantId = createAsyncThunk(
     });
     const dishIds = selectDishIds(state);
 
-    if (restaurantMenu.every((dishId) => dishIds.includes(dishId))) {
+    if (
+      restaurantMenu &&
+      restaurantMenu.every((dishId) => dishIds.includes(dishId))
+    ) {
       return rejectWithValue(LOADING_STATUS.earlyAdded);
     }
 

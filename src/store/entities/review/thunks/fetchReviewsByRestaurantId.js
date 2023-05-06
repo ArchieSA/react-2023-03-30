@@ -11,8 +11,11 @@ export const fetchReviewsByRestaurantId = createAsyncThunk(
       restaurantId,
     });
     const reviewIds = selectReviewIds(state);
-
-    if (restaurantReviews.every((reviewId) => reviewIds.includes(reviewId))) {
+    console.log("restaurantReviews", restaurantReviews);
+    if (
+      restaurantReviews &&
+      restaurantReviews.every((reviewId) => reviewIds.includes(reviewId))
+    ) {
       return rejectWithValue(LOADING_STATUS.earlyAdded);
     }
 

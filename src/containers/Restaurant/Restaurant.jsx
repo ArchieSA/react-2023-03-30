@@ -3,7 +3,7 @@ import {
   selectIsRestaurantLoading,
   selectRestaurantById,
 } from "@/store/entities/restaurant/selectors";
-import { loadRestaurantIfNotExisted } from "@/store/entities/restaurant/thunks/loadRestaurantIfNotExisted";
+import { fetchRestaurant } from "@/store/entities/restaurant/thunks/fetchRestaurant";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -15,7 +15,7 @@ export const RestaurantContainer = ({ restaurantId }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(loadRestaurantIfNotExisted());
+    dispatch(fetchRestaurant());
   }, [dispatch]);
 
   if (isRestaurantLoading) {

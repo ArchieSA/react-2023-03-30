@@ -17,7 +17,7 @@ export const userSlice = createSlice({
       state.loadingStatus = LOADING_STATUS.finished;
       userEntityAdapter.setAll(state, payload);
     },
-    [fetchUsers.failed]: (state) => {
+    [fetchUsers.rejected]: (state, { payload }) => {
       state.loadingStatus =
         payload === LOADING_STATUS.earlyAdded
           ? LOADING_STATUS.finished

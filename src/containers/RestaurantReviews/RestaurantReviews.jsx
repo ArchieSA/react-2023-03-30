@@ -1,6 +1,7 @@
 import { Reviews } from "@/components/Reviews/Reviews";
 import {
   selectIsRestaurantLoading,
+  selectNameByRestaurantId,
   selectReviewsByRestaurantId,
 } from "@/store/entities/restaurant/selectors";
 import { fetchRestaurant } from "@/store/entities/restaurant/thunks/fetchRestaurant";
@@ -9,6 +10,7 @@ import { fetchReviewsByRestaurantId } from "@/store/entities/review/thunks/fetch
 import { fetchUsers } from "@/store/entities/user/thunks/fetchUsers";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { restaurants } from "../../../forLessons/fixtures";
 
 export const RestaurantReviewsContainer = ({ restaurantId }) => {
   const dispatch = useDispatch();
@@ -16,6 +18,9 @@ export const RestaurantReviewsContainer = ({ restaurantId }) => {
   const isRestaurantLoading = useSelector(selectIsRestaurantLoading);
   const reviews = useSelector((state) =>
     selectReviewsByRestaurantId(state, { restaurantId })
+  );
+  const restaurantName = useSelector((state) =>
+    selectNameByRestaurantId(state, { restaurantId })
   );
 
   useEffect(() => {
@@ -34,5 +39,12 @@ export const RestaurantReviewsContainer = ({ restaurantId }) => {
     return "No reviews";
   }
 
-  return <Reviews reviews={reviews} />;
+  return (
+    <>
+      <div>
+        <h2>{restaurantName}</h2>
+      </div>
+      <Reviews reviews={reviews} />
+    </>
+  );
 };

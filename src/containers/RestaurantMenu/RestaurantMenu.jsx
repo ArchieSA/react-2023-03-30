@@ -4,6 +4,7 @@ import { fetchDishByRestaurantId } from "@/store/entities/dish/thunk/loadDishByR
 import {
   selectIsRestaurantLoading,
   selectMenuByRestaurantId,
+  selectNameByRestaurantId,
 } from "@/store/entities/restaurant/selectors";
 import { fetchRestaurant } from "@/store/entities/restaurant/thunks/fetchRestaurant";
 import React, { useEffect } from "react";
@@ -16,6 +17,9 @@ export const RestaurantMenuContainer = ({ restaurantId }) => {
   );
   const isRestaurantLoading = useSelector(selectIsRestaurantLoading);
   const isLoading = useSelector(selectIsDishLoading);
+  const restaurantName = useSelector((state) =>
+    selectNameByRestaurantId(state, { restaurantId })
+  );
 
   useEffect(() => {
     if (restaurantId) dispatch(fetchDishByRestaurantId(restaurantId));
@@ -30,5 +34,12 @@ export const RestaurantMenuContainer = ({ restaurantId }) => {
   if (!menu?.length) {
     return "No menu";
   }
-  return <Menu menu={menu} />;
+  return (
+    <>
+      <div>
+        <h2>{restaurantName}</h2>
+      </div>
+      <Menu menu={menu} />
+    </>
+  );
 };

@@ -1,17 +1,15 @@
-import { Restaurant } from "@/components/Restaurant/Restaurant";
+import { Restaurants } from "@/components/Restaurants/Restaurants";
 import {
   selectIsRestaurantLoading,
-  selectRestaurantById,
+  selectRestaurantIds,
 } from "@/store/entities/restaurant/selectors";
 import { loadRestaurantIfNotExisted } from "@/store/entities/restaurant/thunks/loadRestaurantIfNotExisted";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export const RestaurantContainer = ({ restaurantId }) => {
+export const RestaurantsContainer = () => {
   const isRestaurantLoading = useSelector(selectIsRestaurantLoading);
-  const restaurant = useSelector((state) =>
-    selectRestaurantById(state, { restaurantId })
-  );
+  const restaurantIds = useSelector(selectRestaurantIds);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -21,10 +19,5 @@ export const RestaurantContainer = ({ restaurantId }) => {
   if (isRestaurantLoading) {
     return <div>Loading...</div>;
   }
-
-  if (!restaurant) {
-    return null;
-  }
-
-  return <Restaurant restaurant={restaurant} />;
+  return <Restaurants restaurantIds={restaurantIds} />;
 };

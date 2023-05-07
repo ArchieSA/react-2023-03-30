@@ -1,34 +1,27 @@
 import { LOADING_STATUS } from "@/constants/loading-status";
-import { normalizedDishes } from "@/constants/normalized-fixtures";
-import { createSlice } from "@reduxjs/toolkit";
+import { fetchDishByRestaurantId } from "@/store/entities/dish/thunk/loadDishByRestaurantIdIfNotExisted";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  entities: {},
-  ids: [],
-  loadingStatus: LOADING_STATUS.idle,
-};
+const dishEntityAdapter = createEntityAdapter();
 
 export const dishSlice = createSlice({
   name: "dish",
-  initialState,
-  reducers: {
-    startLoading: (state) => {
+  initialState: dishEntityAdapter.getInitialState({
+    loadingStatus: LOADING_STATUS.idle,
+  }),
+  extraReducers: {
+    [fetchDishByRestaurantId.pending]: (state) => {
       state.loadingStatus = LOADING_STATUS.inProgress;
     },
-    finishLoading: (state, { payload }) => {
+    [fetchDishByRestaurantId.fulfilled]: (state, { payload }) => {
       state.loadingStatus = LOADING_STATUS.finished;
-      state.entities = {
-        ...state.entities,
-        ...payload.reduce((acc, dish) => {
-          acc[dish.id] = dish;
-
-          return acc;
-        }, {}),
-      };
-      state.ids = [...new Set([...state.ids, ...payload.map(({ id }) => id)])];
+      dishEntityAdapter.setMany(state, payload);
     },
-    failLoading: (state) => {
-      state.loadingStatus = LOADING_STATUS.failed;
+    [fetchDishByRestaurantId.rejected]: (state, { payload }) => {
+      state.loadingStatus =
+        payload === LOADING_STATUS.earlyAdded
+          ? LOADING_STATUS.finished
+          : LOADING_STATUS.failed;
     },
   },
 });

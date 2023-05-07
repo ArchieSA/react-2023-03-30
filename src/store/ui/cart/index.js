@@ -1,21 +1,16 @@
-import { CART_ACTIONS } from "@/store/ui/cart/actions";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {};
 
-export const cartReducer = (state = initialState, action) => {
-  switch (action?.type) {
-    case CART_ACTIONS.increment:
-      return {
-        ...state,
-        [action.payload]: state[action.payload] ? state[action.payload] + 1 : 1,
-      };
-    case CART_ACTIONS.decrement:
-      return {
-        ...state,
-        [action.payload]: state[action.payload] ? state[action.payload] - 1 : 0,
-      };
-
-    default:
-      return state;
-  }
-};
+export const cartSlice = createSlice({
+  name: "cart",
+  initialState,
+  reducers: {
+    increment: (state, { payload }) => {
+      state[payload] = state[payload] ? state[payload] + 1 : 1;
+    },
+    decrement: (state, { payload }) => {
+      state[payload] = state[payload] ? state[payload] - 1 : 0;
+    },
+  },
+});

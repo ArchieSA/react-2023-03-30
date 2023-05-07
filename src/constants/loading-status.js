@@ -3,4 +3,5 @@ export const LOADING_STATUS = {
   inProgress: "inProgress",
   finished: "finished",
   failed: "failed",
+  earlyAdded: "earlyAdded",
 };

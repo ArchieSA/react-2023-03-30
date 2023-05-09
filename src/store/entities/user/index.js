@@ -1,30 +1,28 @@
 import { LOADING_STATUS } from "@/constants/loading-status";
-import { createSlice } from "@reduxjs/toolkit";
+import { createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { fetchUser } from "./thunks/loadUserIfNotExisted";
 
-const initialState = {
-  entities: {},
-  ids: [],
-  loadingStatus: LOADING_STATUS.idle,
-};
+const userEntityAdapter = createEntityAdapter();
 
 export const userSlice = createSlice({
   name: "user",
-  initialState,
-  reducers: {
-    startLoading: (state) => {
+  initialState: userEntityAdapter.getInitialState({
+    loadingStatus: LOADING_STATUS.idle,
+  }),
+  extraReducers: {
+    [fetchUser.pending]: (state) => {
       state.loadingStatus = LOADING_STATUS.inProgress;
     },
-    finishLoading: (state, { payload }) => {
+    [fetchUser.fulfilled]: (state, { payload }) => {
+      console.log(payload)
       state.loadingStatus = LOADING_STATUS.finished;
-      state.entities = payload.reduce((acc, user) => {
-        acc[user.id] = user;
-
-        return acc;
-      }, {});
-      state.ids = payload.map(({ id }) => id);
+      userEntityAdapter.setMany(state, payload)
     },
-    failLoading: (state) => {
-      state.loadingStatus = LOADING_STATUS.failed;
+    [fetchUser.rejected]: (state, {payload}) => {
+      state.loadingStatus = 
+      payload === LOADING_STATUS.earlyAdded
+      ? LOADING_STATUS.finished
+      : LOADING_STATUS.failed;
     },
   },
 });

@@ -1,15 +1,16 @@
-import { userSlice } from "@/store/entities/user";
 import { selectUserIds } from "@/store/entities/user/selectors";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const loadUserIfNotExisted = () => (dispatch, getState) => {
+export const fetchUser = createAsyncThunk(
+  'user/fetchUser',
+  async (userId, {getState, rejectWithValue}) => {
+
   if (selectUserIds(getState()).length) {
-    return;
+    return rejectWithValue;
   }
 
-  dispatch(userSlice.actions.startLoading());
-
-  fetch("http://localhost:3001/api/users/")
-    .then((response) => response.json())
-    .then((users) => dispatch(userSlice.actions.finishLoading(users)))
-    .catch(() => dispatch(userSlice.actions.failLoading()));
-};
+  const responce = await fetch("http://localhost:3001/api/users/")
+    
+  return await responce.json();
+  }
+); 

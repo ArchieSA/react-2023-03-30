@@ -3,7 +3,8 @@ import React from "react";
 
 import styles from "./styles.module.scss";
 
-export const Reviews = ({ reviews }) => {
+export const Reviews = ({reviews}) => {
+ 
   if (!reviews?.length) {
     return null;
   }

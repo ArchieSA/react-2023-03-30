@@ -4,9 +4,10 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export const UserContainer = ({ userId }) => {
+
   const user = useSelector((state) => selectUserById(state, { userId }));
   const isLoading = useSelector(selectIsUserLoading);
-
+  
   if (isLoading) {
     return <span>Loading...</span>;
   }

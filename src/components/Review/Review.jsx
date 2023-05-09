@@ -11,9 +11,9 @@ export const Review = ({ review, className }) => {
 
   return (
     <div className={className}>
-      <UserContainer userId={userId} />
       <Rating value={rating} />
       <p>{text}</p>
+      <UserContainer userId={userId}/>
     </div>
   );
 };

@@ -1,10 +1,10 @@
-import { NewReviewForm } from "@/components/NewReviewForm/NewReviewForm";
-import { RestaurantMenuContainer } from "@/containers/RestaurantMenu/RestaurantMenu";
-import { RestaurantReviewsContainer } from "@/containers/RestaurantReviews/RestaurantReviews";
+import Link from "next/link";
 import React from "react";
+import styles from "./styles.module.scss";
+import classNames from "classnames";
 
 export const Restaurant = ({ restaurant }) => {
-  const { name, id } = restaurant || {};
+  const { name, id, reviews } = restaurant || {};
 
   // const rating = useMemo(
   //   () =>
@@ -18,12 +18,14 @@ export const Restaurant = ({ restaurant }) => {
   // );
 
   return (
-    <div>
-      <h2>{name}</h2>
-      {/* <Rating value={rating} /> */}
-      <RestaurantMenuContainer restaurantId={id} />
-      <RestaurantReviewsContainer restaurantId={id} />
-      <NewReviewForm />
+    <div >
+      <h2>{name}</h2>         
+        <Link href={{ pathname: "/menu/[id]", query: { id }, }} className={styles.link}>
+          Menu
+        </Link>
+        <Link  href={{ pathname: "/reviews/[id]", query: { id }, }} className={styles.link}>
+          Reviews
+        </Link>    
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import { Home } from "@/components/Home/Home";
-import { loadRestaurantIfNotExisted } from "@/store/entities/restaurant/middlewares/loadRestaurantIfNotExisted";
 import { selectIsRestaurantLoading } from "@/store/entities/restaurant/selectors";
+import { loadRestaurantIfNotExisted } from "@/store/entities/restaurant/thunk/loadRestaurantIfNotExisted";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

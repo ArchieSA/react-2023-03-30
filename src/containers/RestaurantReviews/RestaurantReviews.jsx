@@ -4,6 +4,7 @@ import { selectReviewsByRestaurantId } from "@/store/entities/restaurant/selecto
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsReviewLoading } from "@/store/entities/review/selectors";
 import { loadReviewByRestaurantIdIfNotExisted } from "@/store/entities/review/thunk/loadReviewByRestaurantIdIfNotExisted";
+import { loadUserIfNotExisted } from "@/store/entities/user/thunk/loadUserIfNotExisted";
 
 
 export const RestaurantReviewsContainer = ({ restaurantId }) => {
@@ -17,6 +18,10 @@ export const RestaurantReviewsContainer = ({ restaurantId }) => {
   useEffect(() => {
     dispatch(loadReviewByRestaurantIdIfNotExisted(restaurantId));
   }, [dispatch, restaurantId]);
+
+  useEffect(() => {
+    dispatch(loadUserIfNotExisted());
+  }, [dispatch])
 
   if (!reviews?.length) {
     return null;
